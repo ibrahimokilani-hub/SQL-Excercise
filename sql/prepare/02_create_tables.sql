@@ -56,6 +56,7 @@ create table [reservation]
   res_id int IDENTITY(1,1) primary key,
   cust_id int,
   rest_id int ,
+  table_id int,
   date timestamp,
   party_size int,
   constraint fk_res_rest
@@ -63,7 +64,10 @@ create table [reservation]
   references restaurant(rest_id),
   constraint fk_res_cust
   foreign key (cust_id)
-  references customer(cust_id)
+  references customer(cust_id),
+   constraint fk_res_table
+  foreign key (table_id)
+  references [table](table_id)
 )
 
 ------------
@@ -90,3 +94,15 @@ create table [order_item]
   qty int,
   primary key(order_id, item_id)
 )
+
+alter table order_item
+add constraint fk_orderitem_order
+foreign key (order_id)
+references [order](order_id);
+
+alter table order_item
+add constraint fk_orderitem_item
+foreign key (item_id)
+references menu_item(item_id);
+
+
