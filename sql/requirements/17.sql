@@ -10,7 +10,8 @@
 --  SET SHOWPLAN_TEXT OFF;
 -------------------------------------------
 
-SET SHOWPLAN_TEXT ON;
+SET STATISTICS TIME ON;
+SET STATISTICS IO ON;
 GO
 
 -- --- Query 1 ---
@@ -58,6 +59,7 @@ FROM reservation
 JOIN restaurant ON reservation.rest_id = restaurant.rest_id
 JOIN customer ON reservation.cust_id = customer.cust_id;
 GO
-
+SET STATISTICS TIME OFF;
+SET STATISTICS IO OFF;
 SET SHOWPLAN_TEXT OFF;
 GO
